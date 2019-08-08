@@ -17,7 +17,7 @@
       "type": "file",
       "file": {
         "timeout": 86400000,
-        "cachePath": "D:\\node\\xuexi\\runtime\\cache",
+        "cachePath": "D:\\node\\thinkjscms\\runtime\\cache",
         "pathDepth": 1,
         "gcInterval": 86400000
       }
@@ -44,13 +44,13 @@
           "name": "thinkjs",
           "timeout": 86400
         },
-        "sessionPath": "D:\\node\\xuexi\\runtime\\session"
+        "sessionPath": "D:\\node\\thinkjscms\\runtime\\session"
       }
     },
     "view": {
       "type": "nunjucks",
       "nunjucks": {
-        "viewPath": "D:\\node\\xuexi\\view",
+        "viewPath": "D:\\node\\thinkjscms\\view",
         "sep": "_",
         "extname": ".html"
       }
@@ -62,14 +62,14 @@
         "backups": 10,
         "absolute": true,
         "maxLogSize": 51200,
-        "filename": "D:\\node\\xuexi\\logs\\app.log"
+        "filename": "D:\\node\\thinkjscms\\logs\\app.log"
       },
       "dateFile": {
         "level": "ALL",
         "absolute": true,
         "pattern": "-yyyy-MM-dd",
         "alwaysIncludePattern": true,
-        "filename": "D:\\node\\xuexi\\logs\\app.log"
+        "filename": "D:\\node\\thinkjscms\\logs\\app.log"
       }
     }
   },
@@ -91,7 +91,7 @@
       "type": "file",
       "file": {
         "timeout": 86400000,
-        "cachePath": "D:\\node\\xuexi\\runtime\\cache",
+        "cachePath": "D:\\node\\thinkjscms\\runtime\\cache",
         "pathDepth": 1,
         "gcInterval": 86400000
       }
@@ -118,13 +118,13 @@
           "name": "thinkjs",
           "timeout": 86400
         },
-        "sessionPath": "D:\\node\\xuexi\\runtime\\session"
+        "sessionPath": "D:\\node\\thinkjscms\\runtime\\session"
       }
     },
     "view": {
       "type": "nunjucks",
       "nunjucks": {
-        "viewPath": "D:\\node\\xuexi\\view",
+        "viewPath": "D:\\node\\thinkjscms\\view",
         "sep": "_",
         "extname": ".html"
       }
@@ -136,14 +136,14 @@
         "backups": 10,
         "absolute": true,
         "maxLogSize": 51200,
-        "filename": "D:\\node\\xuexi\\logs\\app.log"
+        "filename": "D:\\node\\thinkjscms\\logs\\app.log"
       },
       "dateFile": {
         "level": "ALL",
         "absolute": true,
         "pattern": "-yyyy-MM-dd",
         "alwaysIncludePattern": true,
-        "filename": "D:\\node\\xuexi\\logs\\app.log"
+        "filename": "D:\\node\\thinkjscms\\logs\\app.log"
       }
     }
   },
@@ -165,7 +165,7 @@
       "type": "file",
       "file": {
         "timeout": 86400000,
-        "cachePath": "D:\\node\\xuexi\\runtime\\cache",
+        "cachePath": "D:\\node\\thinkjscms\\runtime\\cache",
         "pathDepth": 1,
         "gcInterval": 86400000
       }
@@ -192,13 +192,13 @@
           "name": "thinkjs",
           "timeout": 86400
         },
-        "sessionPath": "D:\\node\\xuexi\\runtime\\session"
+        "sessionPath": "D:\\node\\thinkjscms\\runtime\\session"
       }
     },
     "view": {
       "type": "nunjucks",
       "nunjucks": {
-        "viewPath": "D:\\node\\xuexi\\view",
+        "viewPath": "D:\\node\\thinkjscms\\view",
         "sep": "_",
         "extname": ".html"
       }
@@ -210,14 +210,14 @@
         "backups": 10,
         "absolute": true,
         "maxLogSize": 51200,
-        "filename": "D:\\node\\xuexi\\logs\\app.log"
+        "filename": "D:\\node\\thinkjscms\\logs\\app.log"
       },
       "dateFile": {
         "level": "ALL",
         "absolute": true,
         "pattern": "-yyyy-MM-dd",
         "alwaysIncludePattern": true,
-        "filename": "D:\\node\\xuexi\\logs\\app.log"
+        "filename": "D:\\node\\thinkjscms\\logs\\app.log"
       }
     }
   }
