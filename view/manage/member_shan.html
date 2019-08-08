@@ -1,0 +1,153 @@
+{% include "../manage/meta.html" %}
+<title>用户管理</title>
+<meta name="keywords" content="uniphp">
+<meta name="description" content="uniphp,轻量级php框架.">
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 用户中心 <span class="c-gray en">&gt;</span> 用户管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+	<div class="text-c"> 
+		<form action="" method="post">
+			<input type="text" class="input-text" style="width:250px" placeholder="输入会员名称、电话" id="" name="key">
+			<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
+		</form>
+	</div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> 
+		<span class="l">
+			
+			
+		</span> <span class="r">共有数据：<strong>{{count}}</strong> 条</span> </div>
+	<div class="mt-20">
+	<table class="table table-border table-bordered table-hover table-bg table-sort">
+		<thead>
+			<tr class="text-c">
+					<th width="80">ID</th>
+					<th width="100">用户名</th>
+					<th width="40">性别</th>
+					<th width="90">手机</th>
+					<th width="150">邮箱</th>
+					<th width="">地址</th>
+					<th width="130">加入时间</th>
+					<th width="70">状态</th>
+					<th width="70">认证</th>
+					<th width="100">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+				{% for item in member %}
+				<tr class="text-c">
+					<td>{{item.id}}</td>
+					<td>{{item.username}}</td>
+					<td>
+						{% if item.sex==1 %}
+							男
+						{% elif item.sex==2 %}
+						  女
+						{% else %}
+						  未知
+						{% endif %}
+					</td>
+					<td>{{item.phone}}</td>
+					<td>{{item.email}}</td>
+					<td class="text-l">
+						{% if item.sheng!="请选择" or item.shi!="请选择" or item.xian!="请选择" or item.address %}
+							{{item.sheng}}  {{item.shi}}  {{item.xian}}  {{item.address}}
+						{% else %}
+							暂未填写
+						{% endif %}
+					</td>
+					<td>{{ (item.up_time*1000) | utc }}</td>
+					<td class="td-status">
+						{% if item.isopen==1 %}
+							<span class="label label-success radius">已启用</span>
+						{% else %}
+							<span class="label label-default radius">已禁用</span>
+						{% endif %}
+					</td>
+					<td class="td-status">
+							{% if item.state==1 %}
+								<span class="label label-success radius">已认证</span>
+							{% else %}
+								<span class="label label-default radius">未认证</span>
+							{% endif %}
+						</td>
+					<td class="td-manage">
+							<a style="text-decoration:none" href="javascript:;" onClick="member_huanyuan(this,{{item.id}})" title="还原"><i class="Hui-iconfont">&#xe66b;</i></a> 
+							<a title="删除" href="javascript:;" onclick="member_zhongdel(this,{{item.id}})" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+				</tr>
+				{% endfor %}
+		</tbody>
+	</table>
+	{{ html | safe}}
+	<style>
+		#page{
+			padding: 20px 0 0 20px;
+		}
+		#page a{
+			display: inline-block;
+			padding: 3px 5px;
+			font-size: 16px;
+			margin: 0 5px;
+			border: 1px solid #f1f1f1;
+		}
+		#page a:hover,#page .xuan{
+			background:#32CD32;
+			color: #ffffff;
+		}
+	</style>
+	</div>
+</div>
+{% include "../manage/footer.html" %}
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/manage/lib/My97DatePicker/4.8/WdatePicker.js"></script> 
+<script type="text/javascript" src="/static/manage/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+<script type="text/javascript" src="/static/manage/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+
+
+/*管理员-还原*/
+function member_huanyuan(obj,id){
+	layer.confirm('确认要还原吗？',function(index){
+		//此处请求后台程序，下方是成功后的前台处理……
+		$.post(
+			"/manage/member/ajax",
+		{
+			id:id,
+			type:'member_huanyuan',
+		},
+		function(result){
+	        if(result.errno!=0){
+	        	layer.msg('还原失败!',{icon: 5,time:1000});
+	        }else{
+	        	$(obj).parents("tr").remove();
+				layer.msg('已还原!',{icon: 1,time:1000});
+	        }
+	    });	
+	});
+}
+
+
+/*管理员-删除*/
+function member_zhongdel(obj,id){
+	layer.confirm('删除后将无法恢复，确认要删除吗？',function(index){
+		//此处请求后台程序，下方是成功后的前台处理……
+		$.post(
+			"/manage/member/ajax",
+		{
+			id:id,
+			type:'member_zhongdel',
+		},
+		function(result){
+	        if(result.errno!=0){
+	        	layer.msg('删除失败!',{icon: 5,time:1000});
+	        }else{
+	        	$(obj).parents("tr").remove();
+				layer.msg('已删除!',{icon:1,time:1000});
+	        }
+	    });	
+	});
+}
+
+</script> 
+</body>
+</html>

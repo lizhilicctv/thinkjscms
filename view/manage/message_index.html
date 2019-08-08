@@ -1,0 +1,112 @@
+{% include "../manage/meta.html" %}
+<title>留言管理</title>
+<meta name="keywords" content="uniphp">
+<meta name="description" content="uniphp,轻量级php框架.">
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 留言中心 <span class="c-gray en">&gt;</span> 留言管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+	<div class="text-c"> 
+	<form action="" method="post">
+		<input type="text" class="input-text" style="width:250px" placeholder="搜索内容" id="" name="key">
+		<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜留言</button>
+	</form>
+	</div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> 
+	</span> <span class="r">共有数据：<strong>{{count}}</strong> 条</span> </div>
+	<div class="mt-20">
+	<table class="table table-border table-bordered table-hover table-bg table-sort">
+		<thead>
+			<tr class="text-c">
+				<th width="60">ID</th>
+				<th width="100">标题</th>
+				<th width="60">姓名</th>
+				<th width="60">手机</th>
+				<th width="260">内容</th>
+				<th width="130">时间</th>
+				<th width="70">状态</th>
+				<th width="80">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for item in message %}
+			<tr class="text-c">
+				<td>{{item.id}}</td>
+				<td>{{item.title}}</td>
+				<td>{{item.name}}</td>
+				<td>{{item.phone}}</td>
+				<td>{{item.neirong}}</td>
+				<td>{{(item.in_time*1000)|utc}}</td>
+				<td class="td-status">
+					{% if item.isopen ==1 %}
+					<span class="label label-success radius">已查看</span>
+					{% else %}
+					<span class="label label-default radius">未查看</span>
+					{% endif %}
+				</td>
+				<td class="td-manage">
+					<a title="编辑" href="javascript:;" onclick="message_edit('编辑','/manage/message/edit?id={{item.id}}','4','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> 
+					<a title="删除" href="javascript:;" onclick="message_del(this,{{item.id}})" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{{ html | safe}}
+			<style>
+				#page{
+					padding: 20px 0 0 20px;
+				}
+				#page a{
+					display: inline-block;
+					padding: 3px 5px;
+					font-size: 16px;
+					margin: 0 5px;
+					border: 1px solid #f1f1f1;
+				}
+				#page a:hover,#page .xuan{
+					background:#32CD32;
+					color: #ffffff;
+				}
+			</style>
+	</div>
+</div>
+{% include "../manage/footer.html" %}
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/manage/lib/My97DatePicker/4.8/WdatePicker.js"></script> 
+<script type="text/javascript" src="/static/manage/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+<script type="text/javascript" src="/static/manage/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+/*留言-编辑*/
+function message_edit(title,url,id,w,h){
+	layer_show(title,url,w,h);
+}
+/*管理员-删除*/
+function message_del(obj,id){
+	layer.confirm('确认要删除吗？',function(index){
+		//此处请求后台程序，下方是成功后的前台处理……
+		$.post(
+			"/manage/message/ajax",
+		{
+			id:id,
+			type:'message_del',
+		},
+		function(result){
+			console.log(result)
+			if(result.errno!=0){
+				layer.msg('删除失败!',{icon: 5,time:1000});
+			}else{
+				$(obj).parents("tr").remove();
+				layer.msg('已删除!',{icon:1,time:1000});
+				if(result.errmsg.num==0){
+					parent.document.getElementById("lizhili_liu").innerHTML="留";
+				}else{
+					parent.document.getElementById("lizhili_liu").innerHTML="留"+result.errmsg.num;
+				}
+			}
+	    });	
+	});
+}
+
+</script> 
+</body>
+</html>

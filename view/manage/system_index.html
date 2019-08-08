@@ -1,0 +1,68 @@
+{% include "../manage/meta.html" %}
+<title>基本设置</title>
+<meta name="keywords" content="uniphp">
+<meta name="description" content="uniphp,轻量级php框架.">
+</head>
+<body>
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 系统管理 <span class="c-gray en">&gt;</span> 基本设置 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<form action="" method="post" class="form form-horizontal" id="form-article-add">
+				
+				{% for item in system %}
+					{% if item.type == 1 %}
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2">{{item.cnname}}：</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<input type="text" id="website-title" placeholder="" name="{{item.enname}}" value="{{item.value|shitosting}}" class="input-text">
+						</div>
+					</div>
+					{% endif %}
+					{% if item.type == 2 %}
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2">{{item.cnname}}：</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<textarea name="{{item.enname}}" class="textarea">{{item.value}}</textarea>
+						</div>
+					</div>
+					{% endif %}
+					{% if item.type == 3 %}
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2">{{item.cnname}}：</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							{% for item1 in item.arr %}
+								<div class="radio-box" style="margin-top: 3px;padding-left: 0;">
+									 <input type="radio" id="radio-1" name="value" {% if item.value == item1 %}checked{% endif %} value="{{item1}}">
+									<label for="radio-1">{{item1}}</label>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+					{% endif %}
+				{% endfor %}
+				
+				<div class="row cl">
+					<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+						<button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+						<button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+					</div>
+				</div>
+			</form>
+		</article>
+	</div>
+
+
+{% include "../manage/footer.html" %}
+<script type="text/javascript">
+$(function(){
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+	$.Huitab("#tab-system .tabBar span","#tab-system .tabCon","current","click","0");
+});
+</script> 
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

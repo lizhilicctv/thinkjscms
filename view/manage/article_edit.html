@@ -1,0 +1,219 @@
+{% include "../manage/meta.html" %}
+<title>新增文章 - 资讯管理</title>
+<meta name="keywords" content="uniphp">
+<meta name="description" content="uniphp,轻量级php框架.">
+</head>
+<body>
+
+<article class="page-container" style="padding-left: 100px !important;">
+	<form class="form form-horizontal" enctype="multipart/form-data"  action="" method="post" id="form-article-add">
+		<input type="hidden" name="id" id="id" value="{{data.id}}" />
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2"><span class="c-red">*</span>文章标题：</label>
+			<div class="formControls col-xs-9 col-sm-9">
+				<input type="text" class="input-text" value="{{data.title}}" placeholder="请输入文章标题" id="title" name="title">
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2"><span class="c-red">*</span>分类栏目：</label>
+			<div class="formControls col-xs-9 col-sm-9"> <span class="select-box">
+				<select  name="cateid" class="select">
+						<option value="0">顶级分类</option>
+						{% for item in cate %}
+						<option {% if item.id==data.cateid %}	selected="selected"	{% endif %} value="{{item.id}}">{{item.level | chongfu("|--")}}{{item.catename}}</option>
+						{% endfor %}
+				</select>
+				</span> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">关键词：</label>
+			<div class="formControls col-xs-9 col-sm-9">
+				<input type="text" class="input-text" value="{{data.keyword}}" placeholder="请输入关键词" id="keyword" name="keyword">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">文章摘要：</label>
+			<div class="formControls col-xs-9 col-sm-9">
+				<textarea name="desc" id="desc" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="textlength()">{{data.desc}}</textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">文章作者：</label>
+			<div class="formControls col-xs-9 col-sm-9">
+				<input type="text" class="input-text" value="{{data.author}}" placeholder="" id="author" name="author">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">设为推荐：</label>
+			<div class="formControls col-xs-9 col-sm-9">
+				<div class="switch"  data-on-label="开" data-off-label="关">
+					{% if data.state==1 %}
+						<input type="checkbox" checked="checked" name="state"/>
+					{% else %}
+						<input type="checkbox" name="state"/>
+					{% endif %}
+
+			    </div>
+			</div>
+		</div>
+		 
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2">缩略图：</label>
+			<div class="formControls col-xs-9 col-sm-9">
+				<div class="uploader-thum-container">
+					<a href="javascript:void();" class="btn btn-primary radius"><i class="icon Hui-iconfont">&#xe642;</i> 浏览文件</a>
+					<input type="file" class="input-file" onchange='onpic()' name="pic" id="pic" value="" accept='image/*' style="font-size: 20px;left:0;"/><span id="sp"></span>
+				</div>
+				<div style="margin-top: 15px;">
+					{% if data.pic!= '' %}
+					<img src="{{data.pic}}" height="60" style="margin: 20px;"/>
+					{% else %}
+					<div>暂无缩率图</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-3 col-sm-2"><span class="c-red">*</span>文章内容：</label>
+			<div class="formControls col-xs-9 col-sm-9"> 
+				<script id="editor" name='editor' type="text/plain" style="width:100%;height:400px;"></script> 
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+				<button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i>&nbsp;&nbsp;提交</button>
+				<button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+			</div>
+		</div>
+	</form>
+</article>
+
+{% include "../manage/footer.html" %}
+
+<!--请在下方写此页面业务相关的脚本-->
+<style type="text/css">
+	.li123{
+		line-height: 30px;
+		background: burlywood;
+		display: inline-block;
+		vertical-align: middle;padding: 0 8px;
+	}
+</style>
+<script type="text/javascript" src="/static/manage/lib/My97DatePicker/4.8/WdatePicker.js"></script> 
+<script type="text/javascript" src="/static/manage/lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" src="/static/manage/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" src="/static/manage/lib/jquery.validation/1.14.0/messages_zh.js"></script>   
+<script type="text/javascript" src="/static/manage/lib/webuploader/0.1.5/webuploader.min.js"></script> 
+<script type="text/javascript" src="/static/manage/lib/ueditor/1.4.3/ueditor.config.js"></script> 
+<script type="text/javascript" src="/static/manage/lib/ueditor/1.4.3/ueditor.all.min.js"> </script> 
+<script type="text/javascript" src="/static/manage/lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript">
+//我把内容加到 编辑器里面去
+let a='{{data.editor | shitosting }}'
+function  HTMLDeCode(str) 
+ { 
+    str = str.replace(/&amp;/g, '&');
+	str = str.replace(/&lt;/g, '<');
+	str = str.replace(/&gt;/g, '>');
+	str = str.replace(/&quot;/g, '"');
+	str = str.replace(/&#039;/g, "'");
+	return str;
+ } 
+$('#editor').html(HTMLDeCode(a));
+
+
+$(function(){
+	jQuery.validator.addMethod("isNull", function(value, element) {      
+         return  value!=0 && value!='';       
+    }, "不能为空");  
+    
+
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+	
+	$("#form-article-add").validate({
+		rules:{
+			title:{
+				required:true,
+			},
+			cateid:{
+				required:true,
+				isNull:true
+			},
+			editor:{
+				required:true,
+				isNull:true
+			},
+		}
+	});
+	
+
+	var ue = UE.getEditor('editor',{
+		toolbars: [
+			[
+				'source', //源代码
+				'undo', //撤销
+				'redo', //重做
+				'bold', //加粗
+				'indent', //首行缩进
+				'snapscreen', //截图
+				'italic', //斜体
+				'underline', //下划线
+				'strikethrough', //删除线
+				'subscript', //下标
+				'fontborder', //字符边框
+				'superscript', //上标
+				'formatmatch', //格式刷
+				'pasteplain', //纯文本粘贴模式
+				'selectall', //全选
+				'horizontal', //分隔线
+				'removeformat', //清除格式
+				'time', //时间
+				'date', //日期
+				'unlink', //取消链接
+				'cleardoc', //清空文档
+				'fontfamily', //字体
+				'fontsize', //字号
+				'paragraph', //段落格式
+				'simpleupload', //单图上传
+				'link', //超链接
+				'emotion', //表情
+				'spechars', //特殊字符
+				'justifyleft', //居左对齐
+				'justifyright', //居右对齐
+				'justifycenter', //居中对齐
+				'justifyjustify', //两端对齐
+				'forecolor', //字体颜色
+				'backcolor', //背景色
+			]
+		]
+	});
+	
+});
+function textlength(){
+	var nmb=$('#desc').val().length;
+	$('.textarea-length').text(nmb);
+	if(nmb>200){
+		$('#desc').css("background-color","orangered");
+	}else{
+		$('#desc').css("background-color","white");
+	}
+}
+function removeIframe(){
+	history.go(-1);
+	return false;
+}
+function onpic(){
+	var file=document.getElementById("pic").files[0];
+	document.getElementById("sp").innerHTML='您已经选择图片：'+file['name'];
+	document.getElementById("sp").className = 'li123';
+}
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

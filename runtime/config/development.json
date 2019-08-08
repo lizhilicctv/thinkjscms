@@ -1,0 +1,224 @@
+{
+  "common": {
+    "port": 8360,
+    "workers": 5,
+    "stickyCluster": false,
+    "startServerTimeout": 3000,
+    "reloadSignal": "SIGUSR2",
+    "processKillTimeout": 10000,
+    "jsonpCallbackField": "callback",
+    "jsonContentType": "application/json",
+    "jsonpContentType": "application/javascript",
+    "errnoField": "errno",
+    "errmsgField": "errmsg",
+    "defaultErrno": 1000,
+    "validateDefaultErrno": 1001,
+    "cache": {
+      "type": "file",
+      "file": {
+        "timeout": 86400000,
+        "cachePath": "D:\\node\\xuexi\\runtime\\cache",
+        "pathDepth": 1,
+        "gcInterval": 86400000
+      }
+    },
+    "model": {
+      "type": "mysql",
+      "mysql": {
+        "logConnect": true,
+        "logSql": true,
+        "database": "nodecms",
+        "prefix": "lizhili_",
+        "encoding": "utf8",
+        "host": "127.0.0.1",
+        "port": "",
+        "user": "root",
+        "password": "root",
+        "dateStrings": true
+      }
+    },
+    "session": {
+      "type": "file",
+      "file": {
+        "cookie": {
+          "name": "thinkjs",
+          "timeout": 86400
+        },
+        "sessionPath": "D:\\node\\xuexi\\runtime\\session"
+      }
+    },
+    "view": {
+      "type": "nunjucks",
+      "nunjucks": {
+        "viewPath": "D:\\node\\xuexi\\view",
+        "sep": "_",
+        "extname": ".html"
+      }
+    },
+    "logger": {
+      "type": "console",
+      "console": {},
+      "file": {
+        "backups": 10,
+        "absolute": true,
+        "maxLogSize": 51200,
+        "filename": "D:\\node\\xuexi\\logs\\app.log"
+      },
+      "dateFile": {
+        "level": "ALL",
+        "absolute": true,
+        "pattern": "-yyyy-MM-dd",
+        "alwaysIncludePattern": true,
+        "filename": "D:\\node\\xuexi\\logs\\app.log"
+      }
+    }
+  },
+  "home": {
+    "port": 8360,
+    "workers": 5,
+    "stickyCluster": false,
+    "startServerTimeout": 3000,
+    "reloadSignal": "SIGUSR2",
+    "processKillTimeout": 10000,
+    "jsonpCallbackField": "callback",
+    "jsonContentType": "application/json",
+    "jsonpContentType": "application/javascript",
+    "errnoField": "errno",
+    "errmsgField": "errmsg",
+    "defaultErrno": 1000,
+    "validateDefaultErrno": 1001,
+    "cache": {
+      "type": "file",
+      "file": {
+        "timeout": 86400000,
+        "cachePath": "D:\\node\\xuexi\\runtime\\cache",
+        "pathDepth": 1,
+        "gcInterval": 86400000
+      }
+    },
+    "model": {
+      "type": "mysql",
+      "mysql": {
+        "logConnect": true,
+        "logSql": true,
+        "database": "nodecms",
+        "prefix": "lizhili_",
+        "encoding": "utf8",
+        "host": "127.0.0.1",
+        "port": "",
+        "user": "root",
+        "password": "root",
+        "dateStrings": true
+      }
+    },
+    "session": {
+      "type": "file",
+      "file": {
+        "cookie": {
+          "name": "thinkjs",
+          "timeout": 86400
+        },
+        "sessionPath": "D:\\node\\xuexi\\runtime\\session"
+      }
+    },
+    "view": {
+      "type": "nunjucks",
+      "nunjucks": {
+        "viewPath": "D:\\node\\xuexi\\view",
+        "sep": "_",
+        "extname": ".html"
+      }
+    },
+    "logger": {
+      "type": "console",
+      "console": {},
+      "file": {
+        "backups": 10,
+        "absolute": true,
+        "maxLogSize": 51200,
+        "filename": "D:\\node\\xuexi\\logs\\app.log"
+      },
+      "dateFile": {
+        "level": "ALL",
+        "absolute": true,
+        "pattern": "-yyyy-MM-dd",
+        "alwaysIncludePattern": true,
+        "filename": "D:\\node\\xuexi\\logs\\app.log"
+      }
+    }
+  },
+  "manage": {
+    "port": 8360,
+    "workers": 1,
+    "stickyCluster": false,
+    "startServerTimeout": 3000,
+    "reloadSignal": "SIGUSR2",
+    "processKillTimeout": 10000,
+    "jsonpCallbackField": "callback",
+    "jsonContentType": "application/json",
+    "jsonpContentType": "application/javascript",
+    "errnoField": "errno",
+    "errmsgField": "errmsg",
+    "defaultErrno": 1000,
+    "validateDefaultErrno": 1001,
+    "cache": {
+      "type": "file",
+      "file": {
+        "timeout": 86400000,
+        "cachePath": "D:\\node\\xuexi\\runtime\\cache",
+        "pathDepth": 1,
+        "gcInterval": 86400000
+      }
+    },
+    "model": {
+      "type": "mysql",
+      "mysql": {
+        "logConnect": true,
+        "logSql": true,
+        "database": "nodecms",
+        "prefix": "lizhili_",
+        "encoding": "utf8",
+        "host": "127.0.0.1",
+        "port": "",
+        "user": "root",
+        "password": "root",
+        "dateStrings": true
+      }
+    },
+    "session": {
+      "type": "file",
+      "file": {
+        "cookie": {
+          "name": "thinkjs",
+          "timeout": 86400
+        },
+        "sessionPath": "D:\\node\\xuexi\\runtime\\session"
+      }
+    },
+    "view": {
+      "type": "nunjucks",
+      "nunjucks": {
+        "viewPath": "D:\\node\\xuexi\\view",
+        "sep": "_",
+        "extname": ".html"
+      }
+    },
+    "logger": {
+      "type": "console",
+      "console": {},
+      "file": {
+        "backups": 10,
+        "absolute": true,
+        "maxLogSize": 51200,
+        "filename": "D:\\node\\xuexi\\logs\\app.log"
+      },
+      "dateFile": {
+        "level": "ALL",
+        "absolute": true,
+        "pattern": "-yyyy-MM-dd",
+        "alwaysIncludePattern": true,
+        "filename": "D:\\node\\xuexi\\logs\\app.log"
+      }
+    }
+  }
+}
